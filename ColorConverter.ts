@@ -283,7 +283,7 @@ const colorsList = {
 	ivory: '#FFFFF0',
 	white: '#FFFFFF',
 };
-export type colorObject = {
+export type ColorObject = {
 	r: number;
 	g: number;
 	b: number;
@@ -445,7 +445,13 @@ export const rgba2hexa = (r: number, g: number, b: number, a: number) => {
 	aa.length === 1 && (aa = '0' + aa);
 	return (hex + aa).toUpperCase();
 };
-const StringColorConverter = (strColor: string): colorObject => {
+/**
+ * Convert string color value/name to object having properties
+ * rgb,rgba,hex,hexa,red,gree,blue,alpha,hue,saturation,lightness etc.
+ * @param strColor
+ * @returns ColorObject
+ */
+const StringColorConverter = (strColor: string): ColorObject => {
 	let r = 0;
 	let g = 0;
 	let b = 0;
@@ -524,7 +530,7 @@ const StringColorConverter = (strColor: string): colorObject => {
 	let hex = rgb2hex(r, g, b);
 	let hexa = rgba2hexa(r, g, b, a);
 	let name = (colorsList as IColorKey)[hex];
-	let color: colorObject = { r, g, b, h, s, l, a, str, rgb, rgba, hsl, hsla, hex, hexa, name, isValid };
+	let color: ColorObject = { r, g, b, h, s, l, a, str, rgb, rgba, hsl, hsla, hex, hexa, name, isValid };
 	Object.freeze(color);
 	return color;
 };

@@ -435,6 +435,12 @@ const rgba2hexa = (r, g, b, a) => {
     return (hex + aa).toUpperCase();
 };
 exports.rgba2hexa = rgba2hexa;
+/**
+ * Convert string color value/name to object having properties
+ * rgb,rgba,hex,hexa,red,gree,blue,alpha,hue,saturation,lightness etc.
+ * @param strColor
+ * @returns ColorObject
+ */
 const StringColorConverter = (strColor) => {
     let r = 0;
     let g = 0;

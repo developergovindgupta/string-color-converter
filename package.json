@@ -2,9 +2,11 @@
 	"name": "string-color-converter",
 	"version": "2.0.1",
 	"description": "ColorConverter convert string color value to color values object having all values required to any programmer to handle color related coding. It also have collection of methods that convert color values from one type to another type.",
-	"main": "ColorConverter.min.js",
+	"main": "ColorConverter.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublish": "tsc",
+		"build": "tsc"
 	},
 	"types": "ColorConverter.d.ts",
 	"keywords": [
@@ -17,6 +19,13 @@
 		"rgb2hex",
 		"rgba2hexa"
 	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/developergovindgupta/string-color-converter"
+	},
 	"author": "developergovindgupta (Govind Prasad Gupta)",
-	"license": "ISC"
+	"license": "ISC",
+	"devDependencies": {
+		"typescript": "^4.5.5"
+	}
 }
