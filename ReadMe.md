@@ -4,6 +4,10 @@
 
 ### View Demo
 
+[codesandbox link - usase guide](https://codesandbox.io/s/demo-string-color-converter-gcss1y?file=/src/index.js)
+
+[codesandbox link - view example code](https://codesandbox.io/s/string-color-converter-demo-8spk9?file=/src/index.js)
+
 [gitHub link - download sourcecode](https://github.com/developergovindgupta/string-color-converter)
 
 ### How to install
@@ -56,16 +60,19 @@ This library have following methods
 
 |Method|Description|
 |--|--|
-|hsv2hsl|accept { hue, saturation, value} and return {hue, saturation, lightness}|
+|hsv2hsl|accept {hue, saturation, value} and return {hue, saturation, lightness}|
 |hsl2hsv|accept {hue, saturation, lightness} and return { hue, saturation, value}|
-|rgb2hsl|accept {red, green, blue} and return { hue, saturation, lightness}|
-|hsl2rgb|accept { hue, saturation, lightness} and return {red, green, blue}|
+|rgb2hsl|accept {red, green, blue} and return {hue, saturation, lightness}|
+|hsl2rgb|accept {hue, saturation, lightness} and return {red, green, blue}|
 |hex2rgb|accept #RRGGBB and return {red, green, blue}|
-|str2rgb|accept string color value and return {red, green, blue}|
+|str2rgb|accept rgb() string color value and return {red, green, blue}|
+|str2hsl|accept hsl() string color value and return {hue, saturation, lightness}|
 |rgb2hex|accept {red, green, blue} and return #RRGGBB|
 |rgba2hexa|accept {red, green, blue, alpha} and return #RRGGBBAA|
 
 <hr/>
+
+
 
 ## License : Free to use
 
@@ -76,3 +83,5 @@ developergovindgupta
 (Govind Prasad Gupta)
 
 email: govindprasadguptamca@gmail.com
+
+

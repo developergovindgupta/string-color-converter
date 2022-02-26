@@ -1,7 +1,7 @@
 interface IColorKey {
 	[key: string]: string;
 }
-const colorsList = {
+export const colorsList = {
 	'#000000': 'Black',
 	'#000080': 'Navy',
 	'#00008b': 'DarkBlue',
@@ -301,18 +301,38 @@ export type colorObject = {
 	name: string;
 	isValid: boolean;
 };
-
+/**
+ * accept {hue, saturation, value} and return {hue, saturation, lightness}
+ * @param h Numeric hue value from 0 to 360
+ * @param s Numeric saturation value from 0 to 100
+ * @param v Numeric brightness value from 0 to 100
+ * @returns Object {h:hueValue,s:saturationValue,l:lightnessValue}
+ */
 export const hsv2hsl = (h: number, s: number, v: number) => {
 	const l = ((200 - s) * v) / 100;
 	const [_s, _l] = [l === 0 || l === 200 ? 0 : ((s * v) / 100 / (l <= 100 ? l : 200 - l)) * 100, (l * 5) / 10];
 	return { h, s: _s, l: _l };
 };
+/**
+ * accept {hue, saturation, lightness} and return { hue, saturation, value}
+ * @param h Numeric hue value from 0 to 360
+ * @param s Numeric saturation value from 0 to 100
+ * @param l Numeric lightness value from 0 to 100
+ * @returns Object {h:hueValue,s:saturationValue,v:brightnessValue}
+ */
 export const hsl2hsv = (h: number, s: number, l: number) => {
 	const _v = (s * (l < 50 ? l : 100 - l)) / 100;
 	const _s = _v === 0 ? 0 : ((2 * _v) / (l + _v)) * 100;
 	const v = l + _v;
 	return { h, s: _s, v: v };
 };
+/**
+ * accept {red, green, blue} and return {hue, saturation, lightness}
+ * @param r Numeric red value from 0 to 255
+ * @param g Numeric green value from 0 to 255
+ * @param b Numeric blue value from 0 to 255
+ * @returns Object {h:hueValue,s:saturationValue,l:lightnessValue}
+ */
 export const rgb2hsl = (r: number, g: number, b: number) => {
 	let h = 0;
 	let s = 0;
@@ -345,6 +365,13 @@ export const rgb2hsl = (r: number, g: number, b: number) => {
 	}
 	return { h, s, l };
 };
+/**
+ * accept {hue, saturation, lightness} and return {red, green, blue, alpha}
+ * @param h Numeric hue value from 0 to 360
+ * @param s Numeric saturation value from 0 to 100
+ * @param l Numeric lightness value from 0 to 100
+ * @returns Object {r:redValue,g:greenValue,b:blueValue,a:alphaValue}
+ */
 export const hsl2rgb = (h: number, s: number, l: number) => {
 	let ss = s / 100;
 	let ll = l / 100;
@@ -386,6 +413,11 @@ export const hsl2rgb = (h: number, s: number, l: number) => {
 
 	return { r, g, b };
 };
+/**
+ * accept #RRGGBB | #RRGGBBAA and return {red, green, blue, alpha}
+ * @param str Hexa-Color-Representational string
+ * @returns Object {r:redValue,g:greenValue,b:blueValue,a:alphaValue}
+ */
 export const hex2rgb = (str: string) => {
 	let r = 0;
 	let g = 0;
@@ -407,6 +439,11 @@ export const hex2rgb = (str: string) => {
 	}
 	return { r, g, b, a };
 };
+/**
+ * accept rgb() string color value and return {red, green, blue}
+ * @param str rgb format html/css color string
+ * @returns Object {r:redValue,g:greenValue,b:blueValue,a:alphaValue}
+ */
 export const str2rgb = (str: string) => {
 	let r = 0;
 	let g = 0;
@@ -430,6 +467,36 @@ export const str2rgb = (str: string) => {
 		return null;
 	}
 };
+/**
+ * accept hsl() string color value and return {hue, saturation, lightness}
+ * @param str hsl format html/css color string
+ * @returns Object {h:hueValue,s:saturationValue,l:lightnessValue}
+ */
+export const str2hsl = (str: string) => {
+	let h: number = 0;
+	let s: number = 0;
+	let l: number = 0;
+	let a: number = 1;
+	let hsl = str.match(/[\d.]+/g) || [];
+	if (hsl.length === 3) {
+		h = +hsl[0];
+		s = +hsl[1];
+		l = +hsl[2];
+	} else if (hsl.length === 4) {
+		h = +hsl[0];
+		s = +hsl[1];
+		l = +hsl[2];
+		a = +hsl[3];
+	}
+	return { h, s, l, a };
+};
+/**
+ * accept {red, green, blue} and return #RRGGBB
+ * @param r Numeric red value from 0 to 255
+ * @param g Numeric green value from 0 to 255
+ * @param b Numeric blue value from 0 to 255
+ * @returns return html/css hexa color representational string
+ */
 export const rgb2hex = (r: number, g: number, b: number) => {
 	let rr = r.toString(16);
 	let gg = g.toString(16);
@@ -439,13 +506,44 @@ export const rgb2hex = (r: number, g: number, b: number) => {
 	bb.length === 1 && (bb = '0' + bb);
 	return ('#' + rr + gg + bb).toUpperCase();
 };
+/**
+ * accept {red, green, blue, alpha} and return #RRGGBBAA
+ * @param r Numeric red value from 0 to 255
+ * @param g Numeric green value from 0 to 255
+ * @param b Numeric blue value from 0 to 255
+ * @param a Numeric alpha value from 0.0 to 1.0
+ * @returns return html5/css3 hexa color representational string with alpha value
+ */
 export const rgba2hexa = (r: number, g: number, b: number, a: number) => {
 	let hex = rgb2hex(r, g, b);
 	let aa = Math.round(a * 255).toString(16);
 	aa.length === 1 && (aa = '0' + aa);
 	return (hex + aa).toUpperCase();
 };
-const StringColorConverter = (strColor: string) => {
+/**
+ * accept any string color value rgb/hsl/hex/named and return object having properties
+ * {
+ * r: number - red value
+ * g: number - green value
+ * b: number - blue value
+ * a: number - alpha value
+ * h: number - hue value
+ * s: number - saturation value
+ * l: number - lightness value
+ * str: string - original str value that passed as parameter
+ * rgb: string - "rgb(r,g,b)"
+ * rgba: string - "rgba(r,g,b,a)"
+ * hsl: string - "hsl(h,s%,l%)"
+ * hsla: string - "hsla(h,s%,l%,a)"
+ * hex: string - "#RRGGBB"
+ * hexa: string - "#RRGGBBAA"
+ * name: string - html5 color names representational string as. "red","green","blue", etc.
+ * isValid: boolean - false if invalid string is passed in parameter/argument
+ * }
+ * @param strColor any valid color value in string format.
+ * @returns Object of type colorObject explained in description
+ */
+const ColorConverter = (strColor: string) => {
 	let r = 0;
 	let g = 0;
 	let b = 0;
@@ -470,17 +568,11 @@ const StringColorConverter = (strColor: string) => {
 			isValid = false;
 		}
 	} else if (str.match(/^hsl\(\d+\s*,\s*[\d.]+%\s*,\s*[\d.]+%\)|^hsla\(\d+\s*,\s*[\d.]+%\s*,\s*[\d.]+%\s*,\s*[\d.]+\)/g)) {
-		let hsl = str.match(/[\d.]+/g) || [];
-		if (hsl.length === 3) {
-			h = +hsl[0];
-			s = +hsl[1];
-			l = +hsl[2];
-		} else if (hsl.length === 4) {
-			h = +hsl[0];
-			s = +hsl[1];
-			l = +hsl[2];
-			a = +hsl[3];
-		}
+		let hsl = str2hsl(str);
+		h = hsl.h;
+		s = hsl.s;
+		l = hsl.l;
+		a = hsl.a;
 
 		let rgb = hsl2rgb(h, s, l);
 		r = rgb.r;
@@ -504,8 +596,8 @@ const StringColorConverter = (strColor: string) => {
 		} else {
 			isValid = false;
 		}
-	} else if ((colorsList as IColorKey)[str.toLowerCase()]) {
-		let rgba = hex2rgb((colorsList as IColorKey)[str.toLowerCase()]);
+	} else if ((colorsList as IColorKey)[str]) {
+		let rgba = hex2rgb((colorsList as IColorKey)[str]);
 		r = rgba.r;
 		g = rgba.g;
 		b = rgba.b;
@@ -528,9 +620,11 @@ const StringColorConverter = (strColor: string) => {
 	Object.freeze(color);
 	return color;
 };
-Object.defineProperty(String.prototype, 'toColor', {
-	value: function () {
-		return StringColorConverter(this);
-	},
-});
-export default StringColorConverter;
+
+!String.prototype.hasOwnProperty('toColor') &&
+	Object.defineProperty(String.prototype, 'toColor', {
+		value: function () {
+			return ColorConverter(this);
+		},
+	});
+export default ColorConverter;
