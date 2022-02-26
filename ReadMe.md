@@ -70,6 +70,9 @@ This library have following methods
 ## License : Free to use
 
 ## Author 
-    developergovindgupta
-    (Govind Prasad Gupta)
-    email: govindprasadguptamca@gmail.com
+
+developergovindgupta
+
+(Govind Prasad Gupta)
+
+email: govindprasadguptamca@gmail.com
