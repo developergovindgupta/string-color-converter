@@ -528,5 +528,9 @@ const StringColorConverter = (strColor: string) => {
 	Object.freeze(color);
 	return color;
 };
-
+Object.defineProperty(String.prototype, 'toColor', {
+	value: function () {
+		return StringColorConverter(this);
+	},
+});
 export default StringColorConverter;

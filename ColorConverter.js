@@ -525,4 +525,9 @@ var StringColorConverter = function (strColor) {
     Object.freeze(color);
     return color;
 };
+Object.defineProperty(String.prototype, 'toColor', {
+    value: function () {
+        return StringColorConverter(this);
+    },
+});
 exports.default = StringColorConverter;
