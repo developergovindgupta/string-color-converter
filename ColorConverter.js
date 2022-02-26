@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rgba2hexa = exports.rgb2hex = exports.str2rgb = exports.hex2rgb = exports.hsl2rgb = exports.rgb2hsl = exports.hsl2hsv = exports.hsv2hsl = void 0;
-const colorsList = {
+var colorsList = {
     '#000000': 'Black',
     '#000080': 'Navy',
     '#00008b': 'DarkBlue',
@@ -283,29 +283,29 @@ const colorsList = {
     ivory: '#FFFFF0',
     white: '#FFFFFF',
 };
-const hsv2hsl = (h, s, v) => {
-    const l = ((200 - s) * v) / 100;
-    const [_s, _l] = [l === 0 || l === 200 ? 0 : ((s * v) / 100 / (l <= 100 ? l : 200 - l)) * 100, (l * 5) / 10];
-    return { h, s: _s, l: _l };
+var hsv2hsl = function (h, s, v) {
+    var l = ((200 - s) * v) / 100;
+    var _a = [l === 0 || l === 200 ? 0 : ((s * v) / 100 / (l <= 100 ? l : 200 - l)) * 100, (l * 5) / 10], _s = _a[0], _l = _a[1];
+    return { h: h, s: _s, l: _l };
 };
 exports.hsv2hsl = hsv2hsl;
-const hsl2hsv = (h, s, l) => {
-    const _v = (s * (l < 50 ? l : 100 - l)) / 100;
-    const _s = _v === 0 ? 0 : ((2 * _v) / (l + _v)) * 100;
-    const v = l + _v;
-    return { h, s: _s, v: v };
+var hsl2hsv = function (h, s, l) {
+    var _v = (s * (l < 50 ? l : 100 - l)) / 100;
+    var _s = _v === 0 ? 0 : ((2 * _v) / (l + _v)) * 100;
+    var v = l + _v;
+    return { h: h, s: _s, v: v };
 };
 exports.hsl2hsv = hsl2hsv;
-const rgb2hsl = (r, g, b) => {
-    let h = 0;
-    let s = 0;
-    let l = 0;
-    let rr = r / 255;
-    let gg = g / 255;
-    let bb = b / 255;
-    let cmin = Math.min(rr, gg, bb);
-    let cmax = Math.max(rr, gg, bb);
-    let delta = cmax - cmin;
+var rgb2hsl = function (r, g, b) {
+    var h = 0;
+    var s = 0;
+    var l = 0;
+    var rr = r / 255;
+    var gg = g / 255;
+    var bb = b / 255;
+    var cmin = Math.min(rr, gg, bb);
+    var cmax = Math.max(rr, gg, bb);
+    var delta = cmax - cmin;
     if (delta === 0) {
         h = 0;
     }
@@ -327,13 +327,13 @@ const rgb2hsl = (r, g, b) => {
     if (h < 0) {
         h += 360;
     }
-    return { h, s, l };
+    return { h: h, s: s, l: l };
 };
 exports.rgb2hsl = rgb2hsl;
-const hsl2rgb = (h, s, l) => {
-    let ss = s / 100;
-    let ll = l / 100;
-    let c = (1 - Math.abs(2 * ll - 1)) * ss, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = ll - c / 2, r = 0, g = 0, b = 0;
+var hsl2rgb = function (h, s, l) {
+    var ss = s / 100;
+    var ll = l / 100;
+    var c = (1 - Math.abs(2 * ll - 1)) * ss, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = ll - c / 2, r = 0, g = 0, b = 0;
     if (0 <= h && h < 60) {
         r = c;
         g = x;
@@ -367,14 +367,14 @@ const hsl2rgb = (h, s, l) => {
     r = Math.round((r + m) * 255);
     g = Math.round((g + m) * 255);
     b = Math.round((b + m) * 255);
-    return { r, g, b };
+    return { r: r, g: g, b: b };
 };
 exports.hsl2rgb = hsl2rgb;
-const hex2rgb = (str) => {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    let a = 1;
+var hex2rgb = function (str) {
+    var r = 0;
+    var g = 0;
+    var b = 0;
+    var a = 1;
     if (str.length === 4) {
         r = parseInt('' + str[1] + str[1], 16);
         g = parseInt('' + str[2] + str[2], 16);
@@ -391,15 +391,15 @@ const hex2rgb = (str) => {
         b = parseInt('' + str[5] + str[6], 16);
         a = parseInt('' + str[7] + str[8], 16) / 255;
     }
-    return { r, g, b, a };
+    return { r: r, g: g, b: b, a: a };
 };
 exports.hex2rgb = hex2rgb;
-const str2rgb = (str) => {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    let a = 1;
-    let rgb = str.match(/[\d.]+/g);
+var str2rgb = function (str) {
+    var r = 0;
+    var g = 0;
+    var b = 0;
+    var a = 1;
+    var rgb = str.match(/[\d.]+/g);
     if (rgb && rgb.length >= 3) {
         r = parseInt(rgb[0] || '0');
         g = parseInt(rgb[1] || '0');
@@ -407,7 +407,7 @@ const str2rgb = (str) => {
         rgb.length === 4 && (a = +rgb[3]);
         (a > 1 || a < 0) && (a = 1);
         if (r <= 255 && g <= 255 && b <= 255) {
-            return { r, g, b, a };
+            return { r: r, g: g, b: b, a: a };
         }
         else {
             return null;
@@ -418,85 +418,79 @@ const str2rgb = (str) => {
     }
 };
 exports.str2rgb = str2rgb;
-const rgb2hex = (r, g, b) => {
-    let rr = r.toString(16);
-    let gg = g.toString(16);
-    let bb = b.toString(16);
+var rgb2hex = function (r, g, b) {
+    var rr = r.toString(16);
+    var gg = g.toString(16);
+    var bb = b.toString(16);
     rr.length === 1 && (rr = '0' + rr);
     gg.length === 1 && (gg = '0' + gg);
     bb.length === 1 && (bb = '0' + bb);
     return ('#' + rr + gg + bb).toUpperCase();
 };
 exports.rgb2hex = rgb2hex;
-const rgba2hexa = (r, g, b, a) => {
-    let hex = (0, exports.rgb2hex)(r, g, b);
-    let aa = Math.round(a * 255).toString(16);
+var rgba2hexa = function (r, g, b, a) {
+    var hex = (0, exports.rgb2hex)(r, g, b);
+    var aa = Math.round(a * 255).toString(16);
     aa.length === 1 && (aa = '0' + aa);
     return (hex + aa).toUpperCase();
 };
 exports.rgba2hexa = rgba2hexa;
-/**
- * Convert string color value/name to object having properties
- * rgb,rgba,hex,hexa,red,gree,blue,alpha,hue,saturation,lightness etc.
- * @param strColor
- * @returns ColorObject
- */
-const StringColorConverter = (strColor) => {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    let h = 0;
-    let s = 0;
-    let l = 0;
-    let a = 1;
-    let str = strColor.toLowerCase();
-    let isValid = true;
+var StringColorConverter = function (strColor) {
+    var r = 0;
+    var g = 0;
+    var b = 0;
+    var h = 0;
+    var s = 0;
+    var l = 0;
+    var a = 1;
+    var str = strColor.toLowerCase();
+    var isValid = true;
     if (str.match(/^rgb\(\d+\s*,\s*\d+\s*,\s*\d+\)|^rgba\(\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\)/g)) {
-        let rgba = (0, exports.str2rgb)(str);
-        if (rgba) {
-            r = rgba.r;
-            g = rgba.g;
-            b = rgba.b;
-            a = rgba.a;
-            let hsl = (0, exports.rgb2hsl)(r, g, b);
-            h = hsl.h;
-            s = hsl.s;
-            l = hsl.l;
+        var rgba_1 = (0, exports.str2rgb)(str);
+        if (rgba_1) {
+            r = rgba_1.r;
+            g = rgba_1.g;
+            b = rgba_1.b;
+            a = rgba_1.a;
+            var hsl_1 = (0, exports.rgb2hsl)(r, g, b);
+            h = hsl_1.h;
+            s = hsl_1.s;
+            l = hsl_1.l;
         }
         else {
             isValid = false;
         }
     }
     else if (str.match(/^hsl\(\d+\s*,\s*[\d.]+%\s*,\s*[\d.]+%\)|^hsla\(\d+\s*,\s*[\d.]+%\s*,\s*[\d.]+%\s*,\s*[\d.]+\)/g)) {
-        let hsl = str.match(/[\d.]+/g) || [];
-        if (hsl.length === 3) {
-            h = +hsl[0];
-            s = +hsl[1];
-            l = +hsl[2];
+        var hsl_2 = str.match(/[\d.]+/g) || [];
+        if (hsl_2.length === 3) {
+            h = +hsl_2[0];
+            s = +hsl_2[1];
+            l = +hsl_2[2];
         }
-        else if (hsl.length === 4) {
-            h = +hsl[0];
-            s = +hsl[1];
-            l = +hsl[2];
-            a = +hsl[3];
+        else if (hsl_2.length === 4) {
+            h = +hsl_2[0];
+            s = +hsl_2[1];
+            l = +hsl_2[2];
+            a = +hsl_2[3];
         }
-        let rgb = (0, exports.hsl2rgb)(h, s, l);
-        r = rgb.r;
-        g = rgb.g;
-        b = rgb.b;
+        var rgb_1 = (0, exports.hsl2rgb)(h, s, l);
+        r = rgb_1.r;
+        g = rgb_1.g;
+        b = rgb_1.b;
     }
     else if (str[0] === '#') {
         if (str.match(/^#[0-9a-f]+$/i)) {
             if (str.length === 4 || str.length === 7 || str.length === 9) {
-                let rgba = (0, exports.hex2rgb)(str);
-                r = rgba.r;
-                g = rgba.g;
-                b = rgba.b;
-                a = rgba.a;
-                let hsl = (0, exports.rgb2hsl)(r, g, b);
-                h = hsl.h;
-                s = hsl.s;
-                l = hsl.l;
+                var rgba_2 = (0, exports.hex2rgb)(str);
+                r = rgba_2.r;
+                g = rgba_2.g;
+                b = rgba_2.b;
+                a = rgba_2.a;
+                var hsl_3 = (0, exports.rgb2hsl)(r, g, b);
+                h = hsl_3.h;
+                s = hsl_3.s;
+                l = hsl_3.l;
             }
             else {
                 isValid = false;
@@ -506,28 +500,28 @@ const StringColorConverter = (strColor) => {
             isValid = false;
         }
     }
-    else if (colorsList[str]) {
-        let rgba = (0, exports.hex2rgb)(colorsList[str]);
-        r = rgba.r;
-        g = rgba.g;
-        b = rgba.b;
-        a = rgba.a;
-        let hsl = (0, exports.rgb2hsl)(r, g, b);
-        h = hsl.h;
-        s = hsl.s;
-        l = hsl.l;
+    else if (colorsList[str.toLowerCase()]) {
+        var rgba_3 = (0, exports.hex2rgb)(colorsList[str.toLowerCase()]);
+        r = rgba_3.r;
+        g = rgba_3.g;
+        b = rgba_3.b;
+        a = rgba_3.a;
+        var hsl_4 = (0, exports.rgb2hsl)(r, g, b);
+        h = hsl_4.h;
+        s = hsl_4.s;
+        l = hsl_4.l;
     }
     else {
         isValid = false;
     }
-    let rgb = `rgb(${r},${g},${b})`;
-    let rgba = `rgba(${r},${g},${b},${a})`;
-    let hsl = `hsl(${h},${s}%,${l}%)`;
-    let hsla = `hsla(${h},${s}%,${l}%,${a})`;
-    let hex = (0, exports.rgb2hex)(r, g, b);
-    let hexa = (0, exports.rgba2hexa)(r, g, b, a);
-    let name = colorsList[hex];
-    let color = { r, g, b, h, s, l, a, str, rgb, rgba, hsl, hsla, hex, hexa, name, isValid };
+    var rgb = "rgb(".concat(r, ",").concat(g, ",").concat(b, ")");
+    var rgba = "rgba(".concat(r, ",").concat(g, ",").concat(b, ",").concat(a, ")");
+    var hsl = "hsl(".concat(h, ",").concat(s, "%,").concat(l, "%)");
+    var hsla = "hsla(".concat(h, ",").concat(s, "%,").concat(l, "%,").concat(a, ")");
+    var hex = (0, exports.rgb2hex)(r, g, b);
+    var hexa = (0, exports.rgba2hexa)(r, g, b, a);
+    var name = colorsList[hex.toLowerCase()];
+    var color = { r: r, g: g, b: b, h: h, s: s, l: l, a: a, str: str, rgb: rgb, rgba: rgba, hsl: hsl, hsla: hsla, hex: hex, hexa: hexa, name: name, isValid: isValid };
     Object.freeze(color);
     return color;
 };

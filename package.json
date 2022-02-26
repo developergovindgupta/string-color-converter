@@ -1,14 +1,13 @@
 {
 	"name": "string-color-converter",
-	"version": "2.0.1",
+	"version": "2.0.0",
 	"description": "ColorConverter convert string color value to color values object having all values required to any programmer to handle color related coding. It also have collection of methods that convert color values from one type to another type.",
-	"main": "ColorConverter.js",
+	"main": "./ColorConverter.js",
+	"types": "./ColorConverter.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"prepublish": "tsc",
 		"build": "tsc"
 	},
-	"types": "ColorConverter.d.ts",
 	"keywords": [
 		"string-color-converter",
 		"hsv2hsl",

@@ -1,4 +1,4 @@
-export declare type ColorObject = {
+export declare type colorObject = {
     r: number;
     g: number;
     b: number;
@@ -50,11 +50,5 @@ export declare const str2rgb: (str: string) => {
 } | null;
 export declare const rgb2hex: (r: number, g: number, b: number) => string;
 export declare const rgba2hexa: (r: number, g: number, b: number, a: number) => string;
-/**
- * Convert string color value/name to object having properties
- * rgb,rgba,hex,hexa,red,gree,blue,alpha,hue,saturation,lightness etc.
- * @param strColor
- * @returns ColorObject
- */
-declare const StringColorConverter: (strColor: string) => ColorObject;
+declare const StringColorConverter: (strColor: string) => colorObject;
 export default StringColorConverter;
